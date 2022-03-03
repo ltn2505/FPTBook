@@ -41,17 +41,16 @@ namespace FPTBook.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public ActionResult Login(string username, string password)
+        public ActionResult Login(string acc_name, string password)
         {
             if (ModelState.IsValid)
             {
-                var data = db.accounts.Where(e => e.acc_name.Equals(username) && e.password.Equals(password)).ToList();
+                account data = db.accounts.SingleOrDefault(e => e.acc_name== acc_name && e.password== password);
 
-                if (data.Count() > 0)
+                if (data!=null)
                 {
-                        Session["Username"] = data.FirstOrDefault().acc_name;
-                        return RedirectToAction("Index", "Home");
-                    
+                    Session["username"] = acc_name;
+                    return RedirectToAction("Index", "Home");                   
                 }
                 else
                 {
@@ -59,6 +58,11 @@ namespace FPTBook.Controllers
                 }
             }
             return View();
+        }
+        public ActionResult Logout()
+        {
+            Session.Clear();//remove session
+            return RedirectToAction("Index", "Home");
         }
     }
 }

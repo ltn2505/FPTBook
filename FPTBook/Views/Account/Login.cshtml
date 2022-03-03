@@ -10,7 +10,7 @@
         <div class="image-holder">
             <img src="~/Content/images/pic3.jpg" alt="">
         </div>
-        @using (Html.BeginForm())
+        @using (Html.BeginForm("Login", "Account", FormMethod.Post))
         {
             @Html.AntiForgeryToken()
 

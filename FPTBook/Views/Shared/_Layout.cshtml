@@ -26,8 +26,17 @@
                     <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
                 </ul>
                 <ul class="nav navbar-nav right">
-                    <li>@Html.ActionLink("Login", "Login", "Account")</li>
-                    <li>@Html.ActionLink("Register", "Create", "Account")</li>
+                    @if (Session["Username"] != null)
+                    {
+                        <li>@Html.ActionLink("Hello, " + Session["username"], "UpdateAccount", "Account")</li>
+                        <li>@Html.ActionLink("Logout", "Logout", "Account")</li>
+                    }
+                    else
+                    {
+                        <li>@Html.ActionLink("Login", "Login", "Account")</li>
+                        <li>@Html.ActionLink("Register", "Create", "Account")</li>
+                    }
+
                 </ul>
             </div>
         </div>
