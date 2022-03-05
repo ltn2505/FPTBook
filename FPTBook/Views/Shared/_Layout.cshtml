@@ -28,7 +28,7 @@
                 <ul class="nav navbar-nav right">
                     @if (Session["Username"] != null)
                     {
-                        <li>@Html.ActionLink("Hello, " + Session["username"], "UpdateAccount", "Account")</li>
+                        <li>@Html.ActionLink("Hi!, " + Session["username"], "UpdateAccount", "Account")</li>
                         <li>@Html.ActionLink("Logout", "Logout", "Account")</li>
                     }
                     else
