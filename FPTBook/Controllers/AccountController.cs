@@ -12,11 +12,19 @@ namespace FPTBook.Controllers
 {
     public class AccountController : Controller
     {
-        private FPTBookEntities1 db = new FPTBookEntities1();
+        private FPTBookEntities2 db = new FPTBookEntities2();
         // GET: Account
         public ActionResult Index()
         {
-            return View(db.accounts.ToList());
+            if(Session["Admin"] != null)
+            {
+                return View(db.accounts.ToList());
+            }
+            else
+            {
+                Response.Write("<script>alert('you are not admin!')</script>");
+            }
+            return RedirectToAction("Index", "Home");
         }
         public ActionResult Create()
         {
@@ -45,12 +53,20 @@ namespace FPTBook.Controllers
         {
             if (ModelState.IsValid)
             {
-                account data = db.accounts.SingleOrDefault(e => e.acc_name== acc_name && e.password== password);
+                var data = db.accounts.Where(e => e.acc_name.Equals(acc_name) && e.password.Equals(password)).ToList();
 
                 if (data!=null)
                 {
                     Session["username"] = acc_name;
-                    return RedirectToAction("Index", "Home");                   
+                    if (data.FirstOrDefault().state!=null)
+                    {
+                        Session["admin"] = acc_name;
+                        return RedirectToAction("Index", "Account");
+                    }
+                    else
+                    {
+                        return RedirectToAction("Index", "Home");
+                    }
                 }
                 else
                 {

@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="f2316a70c7f74d3990292d1b4033ad68" Name="Diagram1">
+      <Diagram DiagramId="5aeb1707865243d2ae61cc41c49dd897" Name="Diagram1">
         <EntityTypeShape EntityType="FPTBookModel.account" Width="1.5" PointX="0.75" PointY="5.125" IsExpanded="true" />
         <EntityTypeShape EntityType="FPTBookModel.book" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
         <EntityTypeShape EntityType="FPTBookModel.category" Width="1.5" PointX="0.75" PointY="1.625" IsExpanded="true" />

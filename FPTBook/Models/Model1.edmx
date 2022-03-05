@@ -16,6 +16,7 @@
           <Property Name="gender" Type="nvarchar" MaxLength="10" Nullable="false" />
           <Property Name="email" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="address" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="state" Type="char" MaxLength="10" />
         </EntityType>
         <EntityType Name="book">
           <Key>
@@ -155,6 +156,7 @@
           <Property Name="gender" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="address" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="state" Type="String" MaxLength="10" FixedLength="true" Unicode="false" />
           <NavigationProperty Name="orders" Relationship="Self.FK_order_account" FromRole="account" ToRole="order" />
         </EntityType>
         <EntityType Name="book">
@@ -262,7 +264,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="FPTBookEntities1" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="FPTBookEntities2" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="accounts" EntityType="Self.account" />
           <EntitySet Name="books" EntityType="Self.book" />
           <EntitySet Name="categories" EntityType="Self.category" />
@@ -291,7 +293,7 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="FPTBookModelStoreContainer" CdmEntityContainer="FPTBookEntities1">
+        <EntityContainerMapping StorageEntityContainer="FPTBookModelStoreContainer" CdmEntityContainer="FPTBookEntities2">
           <EntitySetMapping Name="accounts">
             <EntityTypeMapping TypeName="FPTBookModel.account">
               <MappingFragment StoreEntitySet="account">
@@ -302,6 +304,7 @@
                 <ScalarProperty Name="gender" ColumnName="gender" />
                 <ScalarProperty Name="email" ColumnName="email" />
                 <ScalarProperty Name="address" ColumnName="address" />
+                <ScalarProperty Name="state" ColumnName="state" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

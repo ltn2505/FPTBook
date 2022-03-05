@@ -27,6 +27,7 @@ namespace FPTBook.Models
         public string gender { get; set; }
         public string email { get; set; }
         public string address { get; set; }
+        public string state { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<order> orders { get; set; }
