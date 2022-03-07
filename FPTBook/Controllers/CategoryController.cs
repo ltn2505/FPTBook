@@ -1,7 +1,9 @@
 ﻿using FPTBook.Models;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
+using System.Net;
 using System.Web;
 using System.Web.Mvc;
 
@@ -39,6 +41,28 @@ namespace FPTBook.Controllers
             }
             return View(category);
         }
+        public ActionResult Edit(string id)
+        {
+            category objCategory = db.categories.ToList().Find(a => a.cate_id.Equals(id));
+            if (objCategory == null)
+            {
+                return HttpNotFound();
+            }
+            return View(objCategory);
+        }
 
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Edit([Bind(Include = "cate_id,cate_name,cate_description")] category category)
+        {
+            if (ModelState.IsValid)
+            {
+                db.Entry(category).State = EntityState.Modified;
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            return View(category);
+        }
     }
 }

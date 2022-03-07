@@ -82,7 +82,7 @@ namespace FPTBook.Controllers
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "acc_id,acc_name,password,full_name,gender,email,address")] account account)
+        public ActionResult Edit([Bind(Include = "acc_id,acc_name,password,full_name,gender,email,address,state")] account account)
         {
             if (ModelState.IsValid)
             {
