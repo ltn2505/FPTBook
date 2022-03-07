@@ -12,19 +12,15 @@ namespace FPTBook.Controllers
 {
     public class AccountController : Controller
     {
-        private FPTBookEntities2 db = new FPTBookEntities2();
+        private FPTBookEntities3 db = new FPTBookEntities3();
         // GET: Account
         public ActionResult Index()
         {
-            if(Session["Admin"] != null)
+            if(Session["Admin"] == null)
             {
-                return View(db.accounts.ToList());
+                return RedirectToAction("Index", "Home");
             }
-            else
-            {
-                Response.Write("<script>alert('you are not admin!')</script>");
-            }
-            return RedirectToAction("Index", "Home");
+            return View(db.accounts.ToList());
         }
         public ActionResult Create()
         {
@@ -60,7 +56,7 @@ namespace FPTBook.Controllers
                     Session["username"] = acc_name;
                     if (data.FirstOrDefault().state!=null)
                     {
-                        Session["admin"] = acc_name;
+                        Session["admin"] = "admin";
                         return RedirectToAction("Index", "Account");
                     }
                     else
@@ -74,6 +70,27 @@ namespace FPTBook.Controllers
                 }
             }
             return View();
+        }
+        public ActionResult Edit()
+        {
+            account objAccount = db.accounts.ToList().Find(a => a.acc_name.Equals(Session["username"]));
+            if (objAccount == null)
+            {
+                return HttpNotFound();
+            }
+            return View(objAccount);
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Edit([Bind(Include = "acc_id,acc_name,password,full_name,gender,email,address")] account account)
+        {
+            if (ModelState.IsValid)
+            {
+                db.Entry(account).State = EntityState.Modified;
+                db.SaveChanges();
+                return RedirectToAction("Index","Home");
+            }
+            return View(account);
         }
         public ActionResult Logout()
         {

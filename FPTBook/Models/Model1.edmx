@@ -37,6 +37,7 @@
           </Key>
           <Property Name="cate_id" Type="nvarchar" MaxLength="10" Nullable="false" />
           <Property Name="cate_name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="cate_description" Type="nvarchar" MaxLength="200" Nullable="false" />
         </EntityType>
         <EntityType Name="order">
           <Key>
@@ -180,6 +181,7 @@
           </Key>
           <Property Name="cate_id" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="cate_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="cate_description" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="books" Relationship="Self.FK_book_category" FromRole="category" ToRole="book" />
         </EntityType>
         <EntityType Name="order">
@@ -264,7 +266,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="FPTBookEntities2" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="FPTBookEntities3" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="accounts" EntityType="Self.account" />
           <EntitySet Name="books" EntityType="Self.book" />
           <EntitySet Name="categories" EntityType="Self.category" />
@@ -293,7 +295,7 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="FPTBookModelStoreContainer" CdmEntityContainer="FPTBookEntities2">
+        <EntityContainerMapping StorageEntityContainer="FPTBookModelStoreContainer" CdmEntityContainer="FPTBookEntities3">
           <EntitySetMapping Name="accounts">
             <EntityTypeMapping TypeName="FPTBookModel.account">
               <MappingFragment StoreEntitySet="account">
@@ -327,6 +329,7 @@
               <MappingFragment StoreEntitySet="category">
                 <ScalarProperty Name="cate_id" ColumnName="cate_id" />
                 <ScalarProperty Name="cate_name" ColumnName="cate_name" />
+                <ScalarProperty Name="cate_description" ColumnName="cate_description" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

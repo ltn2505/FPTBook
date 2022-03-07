@@ -13,10 +13,10 @@ namespace FPTBook.Models
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class FPTBookEntities2 : DbContext
+    public partial class FPTBookEntities3 : DbContext
     {
-        public FPTBookEntities2()
-            : base("name=FPTBookEntities2")
+        public FPTBookEntities3()
+            : base("name=FPTBookEntities3")
         {
         }
     
