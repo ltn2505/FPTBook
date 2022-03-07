@@ -51,7 +51,6 @@ namespace FPTBook.Controllers
             return View(objCategory);
         }
 
-
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "cate_id,cate_name,cate_description")] category category)

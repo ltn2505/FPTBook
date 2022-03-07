@@ -1,0 +1,70 @@
+﻿@model IEnumerable<FPTBook.Models.book>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.book_name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.book_price)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.book_quantity)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.book_picture)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.book_author)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.book_description)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.category.cate_name)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+<tr>
+    <td>
+        @Html.DisplayFor(modelItem => item.book_name)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.book_price)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.book_quantity)
+    </td>
+    <td>
+        <div>
+            <img src="~/Content/images/@item.book_picture" style="width: 80px;" loading="eager" width="80px" height="100px" />
+        </div>
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.book_author)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.book_description)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.category.cate_name)
+    </td>
+    <td>
+        @Html.ActionLink("Edit", "Edit", new { id = item.book_id }) |
+        @Html.ActionLink("Delete", "Delete", new { id = item.book_id })
+    </td>
+</tr>
+}
+
+</table>
