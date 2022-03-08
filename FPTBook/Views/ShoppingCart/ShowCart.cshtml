@@ -1,0 +1,60 @@
+﻿@model FPTBook.Models.Cart
+@{
+    ViewBag.Title = "ShowCart";
+}
+
+<h2>ShowCart</h2>
+@if (Model != null)
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Product name</th>
+                <th>Image</th>
+                <th>Price</th>
+                <th>Quantity</th>
+                <th>Total Price</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.Items)
+            {
+                double total = item._shopping_product.book_price * item._shopping_quantity;
+                <tr>
+                    <td>
+                        @Html.DisplayFor(model => item._shopping_product.book_name)
+                    </td>
+                    <td>
+                        <img src="~/Content/images/@item._shopping_product.book_picture" style="width: 80px; height:100px;" loading="eager" />
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => item._shopping_product.book_price) $
+                    </td>
+                    <td>
+                        @using (Html.BeginForm("Update_Quantity", "ShoppingCart"))
+                        {
+                            <input type="hidden" value="@item._shopping_product.book_id" name="Book_id" />
+                            <input type="number" value="@item._shopping_quantity" name="Quantity" />
+                            <input type="submit" value="Update" />
+                        }
+
+                    </td>
+                    <td>
+                        Total: @total $
+                    </td>
+                    <td>
+                        @Html.ActionLink("Delete", "Delete", new { id = item._shopping_product.book_id })
+                    </td>
+                </tr>
+            }
+        </tbody>
+        <tfoot>
+            <tr>
+                <td colspan="5" style="text-align:right;"> Sum Total: @Model.Total_Money() </td>
+            </tr>
+        </tfoot>
+    </table>
+    <div>
+        @Html.ActionLink("Back to home page", "Index","Home")
+    </div>
+}

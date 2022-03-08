@@ -11,12 +11,17 @@ namespace FPTBook.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class order_detail
     {
+        [Display(Name = "Order id")]
         public int order_id { get; set; }
+        [Display(Name = "Book id")]
         public string book_id { get; set; }
+        [Display(Name = "Quantity")]
         public int quantity { get; set; }
+        [Display(Name = "Price")]
         public int price { get; set; }
     
         public virtual book book { get; set; }

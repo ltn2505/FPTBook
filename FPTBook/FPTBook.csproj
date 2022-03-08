@@ -133,6 +133,7 @@
     <Compile Include="Controllers\BookController.cs" />
     <Compile Include="Controllers\CategoryController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\ShoppingCartController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -142,6 +143,7 @@
     <Compile Include="Models\book.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Cart.cs" />
     <Compile Include="Models\category.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -176,10 +178,19 @@
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\Css\home.css" />
     <Content Include="Content\Css\layout.css" />
     <Content Include="Content\Css\style.css" />
     <Content Include="Content\font\material-design-iconic-font.min.css" />
-    <Content Include="Content\images\pic1.jpg" />
+    <Content Include="Content\images\com1.jpg" />
+    <Content Include="Content\images\com2.jpg" />
+    <Content Include="Content\images\com3.jpg" />
+    <Content Include="Content\images\Hor1.jpg" />
+    <Content Include="Content\images\Hor2.jpg" />
+    <Content Include="Content\images\Hor3.jpg" />
+    <Content Include="Content\images\pic2.jpg" />
+    <Content Include="Content\images\pic3.jpg" />
+    <Content Include="Content\images\shopping_cart.png" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -241,6 +252,7 @@
     <Content Include="Views\Book\Delete.cshtml" />
     <Content Include="Views\Account\Delete.cshtml" />
     <Content Include="Views\Category\Delete.cshtml" />
+    <Content Include="Views\ShoppingCart\ShowCart.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
