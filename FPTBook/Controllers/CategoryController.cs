@@ -63,5 +63,28 @@ namespace FPTBook.Controllers
             }
             return View(category);
         }
+        public ActionResult Delete(string id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            category customer = db.categories.Find(id);
+            if (customer == null)
+            {
+                return HttpNotFound();
+            }
+            return View(customer);
+        }
+
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public ActionResult DeleteConfirmed(string id)
+        {
+            category customer = db.categories.Find(id);
+            db.categories.Remove(customer);
+            db.SaveChanges();
+            return RedirectToAction("Index");
+        }
     }
 }

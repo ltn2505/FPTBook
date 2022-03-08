@@ -16,7 +16,7 @@ namespace FPTBook.Controllers
         // GET: Account
         public ActionResult Index()
         {
-            if(Session["Admin"] == null)
+            if(Session["admin"] == null)
             {
                 return RedirectToAction("Index", "Home");
             }
@@ -96,6 +96,30 @@ namespace FPTBook.Controllers
         {
             Session.Clear();//remove session
             return RedirectToAction("Index", "Home");
+        }
+        public ActionResult Delete(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            account customer = db.accounts.Find(id);
+            if (customer == null)
+            {
+                return HttpNotFound();
+            }
+            return View(customer);
+        }
+
+        // POST: customers/Delete/5
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public ActionResult DeleteConfirmed(int id)
+        {
+            account customer = db.accounts.Find(id);
+            db.accounts.Remove(customer);
+            db.SaveChanges();
+            return RedirectToAction("Index");
         }
     }
 }

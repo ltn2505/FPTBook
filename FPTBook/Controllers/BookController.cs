@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Data.Entity;
 using System.IO;
 using System.Linq;
+using System.Net;
 using System.Web;
 using System.Web.Mvc;
 
@@ -19,7 +20,7 @@ namespace FPTBook.Controllers
         }
         public ActionResult Create()
         {
-            if (Session["Admin"] == null)
+            if (Session["admin"] == null)
             {
                 return RedirectToAction("Index", "Home");
             }
@@ -89,8 +90,42 @@ namespace FPTBook.Controllers
                 }
                 
             }
-            
             return View(book);
         }
+        public ActionResult Delete(string id)
+        {
+            if (Session["admin"] != null)
+            {
+                if (id == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+                book book = db.books.Find(id);
+                Session["OldPath"] = "~/Content/images/" + book.book_picture;
+                if (book == null)
+                {
+                    return HttpNotFound();
+                }
+                return View(book);
+            }
+            return View("Error");
+        }
+
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public ActionResult DeleteConfirmed(string id)
+        {
+            string oldPath = Request.MapPath(Session["OldPath"].ToString());
+
+            book book = db.books.Find(id);
+            db.books.Remove(book);
+            if (System.IO.File.Exists(oldPath))
+            {
+                System.IO.File.Delete(oldPath);
+            }
+            db.SaveChanges();
+            return RedirectToAction("Index");
+        }
+
     }
 }
