@@ -1,6 +1,7 @@
 ﻿using FPTBook.Models;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.IO;
 using System.Linq;
 using System.Web;
@@ -45,11 +46,50 @@ namespace FPTBook.Controllers
                 }
                 else
                 {
-                    ViewBag.Error = "............";
                     return View();
                 }
             }
+            return View(book);
+        }
 
+        public ActionResult Edit(string id)
+        {
+                book book = db.books.Find(id);
+                Session["oldpic"] = "~/Content/images/" + book.book_picture;
+                if (book == null)
+                {
+                    return HttpNotFound();
+                }
+                ViewBag.cate_id = new SelectList(db.categories, "cate_id", "cate_name", book.cate_id);
+                return View(book);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Edit(HttpPostedFileBase image, book book)
+        {
+            if (ModelState.IsValid)
+            {
+                if (image != null && image.ContentLength > 0)
+                {
+                    string pic = Path.GetFileName(image.FileName);
+                    string path = Path.Combine(Server.MapPath("~/Content/images"), pic);
+                    string oldPath = Request.MapPath(Session["oldpic"].ToString());
+                    image.SaveAs(path);
+                    
+                    book.book_picture = pic;
+
+                    db.Entry(book).State = EntityState.Modified;
+                    if (System.IO.File.Exists(oldPath))
+                    {
+                        System.IO.File.Delete(oldPath);
+                    }
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
+                
+            }
+            
             return View(book);
         }
     }
