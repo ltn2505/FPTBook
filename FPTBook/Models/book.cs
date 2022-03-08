@@ -11,8 +11,7 @@ namespace FPTBook.Models
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
-
+    
     public partial class book
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -20,22 +19,14 @@ namespace FPTBook.Models
         {
             this.order_detail = new HashSet<order_detail>();
         }
-
-        [Display(Name = "Book id")]
+    
         public string book_id { get; set; }
-        [Display(Name = "Book name")]
         public string book_name { get; set; }
-        [Display(Name = "Category id")]
         public string cate_id { get; set; }
-        [Display(Name = "Price")]
         public int book_price { get; set; }
-        [Display(Name = "Quantity")]
         public int book_quantity { get; set; }
-        [Display(Name = "Image")]
         public string book_picture { get; set; }
-        [Display(Name = "Author")]
         public string book_author { get; set; }
-        [Display(Name = "Description")]
         public string book_description { get; set; }
     
         public virtual category category { get; set; }

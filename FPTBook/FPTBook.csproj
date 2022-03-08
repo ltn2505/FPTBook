@@ -253,6 +253,7 @@
     <Content Include="Views\Account\Delete.cshtml" />
     <Content Include="Views\Category\Delete.cshtml" />
     <Content Include="Views\ShoppingCart\ShowCart.cshtml" />
+    <Content Include="Views\ShoppingCart\OrderSuccess.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

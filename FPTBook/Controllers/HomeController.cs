@@ -9,7 +9,7 @@ namespace FPTBook.Controllers
 {
     public class HomeController : Controller
     {
-        private FPTBookEntities db = new FPTBookEntities();
+        private FPTBookEntities1 db = new FPTBookEntities1();
         public ActionResult Index()
         {
             return View(db.books.ToList());

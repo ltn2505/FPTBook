@@ -11,8 +11,7 @@ namespace FPTBook.Models
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
-
+    
     public partial class category
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -20,11 +19,9 @@ namespace FPTBook.Models
         {
             this.books = new HashSet<book>();
         }
-        [Display(Name = "Category id")]
+    
         public string cate_id { get; set; }
-        [Display(Name = "Category name")]
         public string cate_name { get; set; }
-        [Display(Name = "Description")]
         public string cate_description { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

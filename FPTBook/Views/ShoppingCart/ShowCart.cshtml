@@ -49,30 +49,62 @@
             }
         </tbody>
         <tfoot>
-            <tr>
-                <td colspan="5">
-                    <table>
-                        <tr>
-                            <td>
-                                Account ID
-                            </td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td>
-                                Account ID
-                            </td>
-                            <td></td>
-                        </tr>
-                    </table>
-                </td>
-            </tr>
-            <tr>
-                <td colspan="5" style="text-align:right;"> Sum Total: @Model.Total_Money() </td>
-            </tr>
-        </tfoot>
+            @using (Html.BeginForm("OrderProduct", "ShoppingCart"))
+            {
+                <tr>
+                    <td colspan="5" style="text-align:right;" name="TotalPrice"> Sum Total: @Model.Total_Money() </td>
+                </tr>
+            }
+                <tr>
+                    <td colspan="2"></td>
+                    <td colspan="4" style="text-align:center">
+                        @using (Html.BeginForm("OrderProduct", "ShoppingCart"))
+                        {
 
+                            <table style="border-collapse:separate;border-spacing:5px;">
+                                <tr>
+                                    <td>Account ID</td>
+                                    <td>
+                                        <input type="number" name="AccID" />
+                                    </td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td>Receiver's name</td>
+                                    <td>
+                                        <input type="text" name="ReName" />
+                                    </td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td>Phone</td>
+                                    <td>
+                                        <input type="text" name="Phone" />
+                                    </td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td>Delivery address</td>
+                                    <td>
+                                        <input type="text" name="DeAddress" />
+                                    </td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td></td>
+                                    <td>
+                                        <input type="submit" value="Order" />
+                                    </td>
+                                    <td></td>
+                                </tr>
+                            </table>
+                        }
+                    </td>
+                </tr>
+
+            </tfoot>
     </table>
+
     <div>
         @Html.ActionLink("Back to home page", "Index","Home")
     </div>

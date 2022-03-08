@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Web.Mvc;
 
 namespace FPTBook.Models
 {
@@ -51,5 +52,10 @@ namespace FPTBook.Models
         {
             items.RemoveAll(s => s._shopping_product.book_id == id);
         }
+        public void ClearCart()
+        {
+            items.Clear();
+        }
+       
     }
 }

@@ -11,8 +11,7 @@ namespace FPTBook.Models
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
-
+    
     public partial class order
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -20,19 +19,13 @@ namespace FPTBook.Models
         {
             this.order_detail = new HashSet<order_detail>();
         }
-
-
+    
         public int order_id { get; set; }
         public int acc_id { get; set; }
-        [Display(Name = "Receiver's name")]
         public string receiver_name { get; set; }
-        [Display(Name = "Phone number")]
         public string phone { get; set; }
-        [Display(Name = "Order date")]
         public System.DateTime order_date { get; set; }
-        [Display(Name = "Delivery address")]
         public string delivery_address { get; set; }
-        [Display(Name = "Total price")]
         public int total_price { get; set; }
     
         public virtual account account { get; set; }
