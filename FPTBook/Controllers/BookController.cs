@@ -12,10 +12,14 @@ namespace FPTBook.Controllers
 {
     public class BookController : Controller
     {
-        private FPTBookEntities3 db = new FPTBookEntities3();
+        private FPTBookEntities db = new FPTBookEntities();
         // GET: Book
         public ActionResult Index()
         {
+            if (Session["admin"] == null)
+            {
+                return RedirectToAction("Index", "Home");
+            }
             return View(db.books.ToList());
         }
         public ActionResult Create()
@@ -55,6 +59,10 @@ namespace FPTBook.Controllers
 
         public ActionResult Edit(string id)
         {
+                if (Session["admin"] == null)
+                {
+                    return RedirectToAction("Index", "Home");
+                }
                 book book = db.books.Find(id);
                 Session["oldpic"] = "~/Content/images/" + book.book_picture;
                 if (book == null)
@@ -108,7 +116,7 @@ namespace FPTBook.Controllers
                 }
                 return View(book);
             }
-            return View("Error");
+            return RedirectToAction("Index", "Home");
         }
 
         [HttpPost, ActionName("Delete")]

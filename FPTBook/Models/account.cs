@@ -20,7 +20,7 @@ namespace FPTBook.Models
         {
             this.orders = new HashSet<order>();
         }
-        
+    
         public int acc_id { get; set; }
         [Display(Name = "User name")]
         public string acc_name { get; set; }
@@ -31,7 +31,6 @@ namespace FPTBook.Models
         [Display(Name = "Gender")]
         public string gender { get; set; }
         [Display(Name = "Email")]
-        [EmailAddress]
         public string email { get; set; }
         [Display(Name = "Address")]
         public string address { get; set; }

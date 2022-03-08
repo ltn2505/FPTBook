@@ -15,7 +15,6 @@ namespace FPTBook.Models
 
     public partial class order_detail
     {
-        [Display(Name = "Order id")]
         public int order_id { get; set; }
         [Display(Name = "Book id")]
         public string book_id { get; set; }

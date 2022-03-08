@@ -45,6 +45,8 @@
           </Key>
           <Property Name="order_id" Type="int" Nullable="false" />
           <Property Name="acc_id" Type="int" Nullable="false" />
+          <Property Name="receiver_name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="phone" Type="nvarchar" MaxLength="15" Nullable="false" />
           <Property Name="order_date" Type="datetime" Nullable="false" />
           <Property Name="delivery_address" Type="nvarchar" MaxLength="200" Nullable="false" />
           <Property Name="total_price" Type="int" Nullable="false" />
@@ -190,6 +192,8 @@
           </Key>
           <Property Name="order_id" Type="Int32" Nullable="false" />
           <Property Name="acc_id" Type="Int32" Nullable="false" />
+          <Property Name="receiver_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="phone" Type="String" MaxLength="15" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="order_date" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="delivery_address" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="total_price" Type="Int32" Nullable="false" />
@@ -266,7 +270,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="FPTBookEntities3" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="FPTBookEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="accounts" EntityType="Self.account" />
           <EntitySet Name="books" EntityType="Self.book" />
           <EntitySet Name="categories" EntityType="Self.category" />
@@ -295,7 +299,7 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="FPTBookModelStoreContainer" CdmEntityContainer="FPTBookEntities3">
+        <EntityContainerMapping StorageEntityContainer="FPTBookModelStoreContainer" CdmEntityContainer="FPTBookEntities">
           <EntitySetMapping Name="accounts">
             <EntityTypeMapping TypeName="FPTBookModel.account">
               <MappingFragment StoreEntitySet="account">
@@ -338,6 +342,8 @@
               <MappingFragment StoreEntitySet="order">
                 <ScalarProperty Name="order_id" ColumnName="order_id" />
                 <ScalarProperty Name="acc_id" ColumnName="acc_id" />
+                <ScalarProperty Name="receiver_name" ColumnName="receiver_name" />
+                <ScalarProperty Name="phone" ColumnName="phone" />
                 <ScalarProperty Name="order_date" ColumnName="order_date" />
                 <ScalarProperty Name="delivery_address" ColumnName="delivery_address" />
                 <ScalarProperty Name="total_price" ColumnName="total_price" />

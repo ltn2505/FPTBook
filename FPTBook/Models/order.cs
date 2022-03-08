@@ -20,10 +20,14 @@ namespace FPTBook.Models
         {
             this.order_detail = new HashSet<order_detail>();
         }
-        [Display(Name = "Order id")]
+
+
         public int order_id { get; set; }
-        [Display(Name = "User id")]
         public int acc_id { get; set; }
+        [Display(Name = "Receiver's name")]
+        public string receiver_name { get; set; }
+        [Display(Name = "Phone number")]
+        public string phone { get; set; }
         [Display(Name = "Order date")]
         public System.DateTime order_date { get; set; }
         [Display(Name = "Delivery address")]

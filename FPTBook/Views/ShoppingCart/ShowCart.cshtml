@@ -50,9 +50,28 @@
         </tbody>
         <tfoot>
             <tr>
+                <td colspan="5">
+                    <table>
+                        <tr>
+                            <td>
+                                Account ID
+                            </td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>
+                                Account ID
+                            </td>
+                            <td></td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+            <tr>
                 <td colspan="5" style="text-align:right;"> Sum Total: @Model.Total_Money() </td>
             </tr>
         </tfoot>
+
     </table>
     <div>
         @Html.ActionLink("Back to home page", "Index","Home")

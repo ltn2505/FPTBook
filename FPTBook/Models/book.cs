@@ -20,9 +20,10 @@ namespace FPTBook.Models
         {
             this.order_detail = new HashSet<order_detail>();
         }
+
         [Display(Name = "Book id")]
         public string book_id { get; set; }
-        [Display(Name = "Name of book")]
+        [Display(Name = "Book name")]
         public string book_name { get; set; }
         [Display(Name = "Category id")]
         public string cate_id { get; set; }
@@ -30,7 +31,7 @@ namespace FPTBook.Models
         public int book_price { get; set; }
         [Display(Name = "Quantity")]
         public int book_quantity { get; set; }
-        [Display(Name = "Picture")]
+        [Display(Name = "Image")]
         public string book_picture { get; set; }
         [Display(Name = "Author")]
         public string book_author { get; set; }

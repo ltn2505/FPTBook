@@ -12,10 +12,10 @@ namespace FPTBook.Controllers
     public class CategoryController : Controller
     {
         // GET: Category
-        private FPTBookEntities3 db = new FPTBookEntities3();
+        private FPTBookEntities db = new FPTBookEntities();
         public ActionResult Index()
         {
-            if (Session["Admin"] == null)
+            if (Session["admin"] == null)
             {
                 return RedirectToAction("Index", "Home");
             }
@@ -23,7 +23,7 @@ namespace FPTBook.Controllers
         }
         public ActionResult Create()
         {
-            if (Session["Admin"] == null)
+            if (Session["admin"] == null)
             {
                 return RedirectToAction("Index", "Home");
             }
@@ -43,6 +43,10 @@ namespace FPTBook.Controllers
         }
         public ActionResult Edit(string id)
         {
+            if (Session["admin"] == null)
+            {
+                return RedirectToAction("Index", "Home");
+            }
             category objCategory = db.categories.ToList().Find(a => a.cate_id.Equals(id));
             if (objCategory == null)
             {
@@ -65,24 +69,28 @@ namespace FPTBook.Controllers
         }
         public ActionResult Delete(string id)
         {
+            if (Session["admin"] == null)
+            {
+                return RedirectToAction("Index", "Home");
+            }
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            category customer = db.categories.Find(id);
-            if (customer == null)
+            category category = db.categories.Find(id);
+            if (category == null)
             {
                 return HttpNotFound();
             }
-            return View(customer);
+            return View(category);
         }
 
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(string id)
         {
-            category customer = db.categories.Find(id);
-            db.categories.Remove(customer);
+            category category = db.categories.Find(id);
+            db.categories.Remove(category);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

@@ -12,7 +12,7 @@ namespace FPTBook.Controllers
 {
     public class AccountController : Controller
     {
-        private FPTBookEntities3 db = new FPTBookEntities3();
+        private FPTBookEntities db = new FPTBookEntities();
         // GET: Account
         public ActionResult Index()
         {
@@ -99,6 +99,10 @@ namespace FPTBook.Controllers
         }
         public ActionResult Delete(int? id)
         {
+            if (Session["admin"] == null)
+            {
+                return RedirectToAction("Index", "Home");
+            }
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);

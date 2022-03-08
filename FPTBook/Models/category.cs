@@ -20,10 +20,9 @@ namespace FPTBook.Models
         {
             this.books = new HashSet<book>();
         }
-
         [Display(Name = "Category id")]
         public string cate_id { get; set; }
-        [Display(Name = "Name of category")]
+        [Display(Name = "Category name")]
         public string cate_name { get; set; }
         [Display(Name = "Description")]
         public string cate_description { get; set; }

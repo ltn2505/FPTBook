@@ -38,11 +38,13 @@
                 <ul class="nav navbar-nav accright" style="float:right">
                     @if (Session["username"] != null)
                     {
+                        <li>@Html.ActionLink("Cart", "ShowCart", "ShoppingCart")</li>
                         <li>@Html.ActionLink("Hi!, " + Session["username"], "Edit", "Account")</li>
                         <li>@Html.ActionLink("Logout", "Logout", "Account")</li>
                     }
                     else
                     {
+                        <li>@Html.ActionLink("Cart", "ShowCart", "ShoppingCart")</li>
                         <li>@Html.ActionLink("Login", "Login", "Account")</li>
                         <li>@Html.ActionLink("Register", "Create", "Account")</li>
                     }

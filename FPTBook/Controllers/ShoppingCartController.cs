@@ -9,7 +9,7 @@ namespace FPTBook.Controllers
 {
     public class ShoppingCartController : Controller
     {
-        private FPTBookEntities3 db = new FPTBookEntities3();
+        private FPTBookEntities db = new FPTBookEntities();
         public Cart GetCart()
         {
             Cart cart = Session["Cart"] as Cart;
@@ -52,5 +52,43 @@ namespace FPTBook.Controllers
             cart.DeleteProduct(id);
             return RedirectToAction("ShowCart", "ShoppingCart");
         }
+        //public ActionResult OrderProduct(FormCollection form)
+        //{
+        //    try
+        //    {
+        //        Cart cart = Session["Cart"] as Cart;
+        //        order _order = new order();
+        //        _order.order_date = DateTime.Now;
+        //        _order.acc_id = int.Parse(form["accountid"]);
+        //        _order.delivery_address = form["AddressDelivery"];
+        //        _order.total_price = Convert.ToInt32(form["TotalPrice"]);
+        //        db.orders.Add(_order);
+
+        //        foreach (var item in cart.Items)
+        //        {
+        //            order_detail orderDetail = new order_detail();
+        //            orderDetail.order_id = _order.order_id;
+        //            orderDetail.book_id = item._shopping_product.book_id;
+        //            orderDetail.quantity = item._shopping_quantity;
+        //            orderDetail.price = item._shopping_product.book_price * item._shopping_quantity;
+
+        //            var pro = db.books.SingleOrDefault(s => s.book_id == orderDetail.book_id);
+
+        //            pro.book_quantity -= orderDetail.quantity;
+        //            db.books.Attach(pro);
+        //            db.Entry(pro).Property(a => a.book_quantity).IsModified = true;
+
+        //            db.order_detail.Add(orderDetail);
+        //        }
+
+        //        db.SaveChanges();
+        //        cart.ClearCart();
+        //        return RedirectToAction("CheckoutSuccess", "ShoppingCart", new { id = _order.OrderID });
+        //    }
+        //    catch
+        //    {
+
+        //    }
+        //}
     }
 }
