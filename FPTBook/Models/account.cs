@@ -20,7 +20,6 @@ namespace FPTBook.Models
             this.orders = new HashSet<order>();
         }
     
-        public int acc_id { get; set; }
         public string acc_name { get; set; }
         public string password { get; set; }
         public string full_name { get; set; }

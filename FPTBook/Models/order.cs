@@ -21,7 +21,7 @@ namespace FPTBook.Models
         }
     
         public int order_id { get; set; }
-        public int acc_id { get; set; }
+        public string acc_name { get; set; }
         public string receiver_name { get; set; }
         public string phone { get; set; }
         public System.DateTime order_date { get; set; }

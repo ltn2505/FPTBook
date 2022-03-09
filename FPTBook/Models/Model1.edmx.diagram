@@ -4,14 +4,14 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="ec6912a935cf40ac968947ad4ec79fe1" Name="Diagram1">
+      <Diagram DiagramId="fb1846edffb24b10bd9172aacd3f1386" Name="Diagram1">
         <EntityTypeShape EntityType="FPTBookModel.account" Width="1.5" PointX="0.75" PointY="5.125" IsExpanded="true" />
         <EntityTypeShape EntityType="FPTBookModel.book" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
         <EntityTypeShape EntityType="FPTBookModel.category" Width="1.5" PointX="0.75" PointY="1.5" IsExpanded="true" />
         <EntityTypeShape EntityType="FPTBookModel.order" Width="1.5" PointX="3" PointY="5.125" IsExpanded="true" />
         <EntityTypeShape EntityType="FPTBookModel.order_detail" Width="1.5" PointX="5.25" PointY="1.375" IsExpanded="true" />
         <EntityTypeShape EntityType="FPTBookModel.sysdiagram" Width="1.5" PointX="5.75" PointY="4.75" IsExpanded="true" />
-        <AssociationConnector Association="FPTBookModel.FK_order_account" ManuallyRouted="false" />
+        <AssociationConnector Association="FPTBookModel.FK_order_account1" ManuallyRouted="false" />
         <AssociationConnector Association="FPTBookModel.FK_book_category" ManuallyRouted="false" />
         <AssociationConnector Association="FPTBookModel.FK_order_detail_book" ManuallyRouted="false" />
         <AssociationConnector Association="FPTBookModel.FK_order_detail_order" ManuallyRouted="false" />

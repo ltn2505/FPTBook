@@ -82,7 +82,7 @@ namespace FPTBook.Controllers
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "acc_id,acc_name,password,full_name,gender,email,address,state")] account account)
+        public ActionResult Edit([Bind(Include = "acc_name,password,full_name,gender,email,address,state")] account account)
         {
             if (ModelState.IsValid)
             {
@@ -97,31 +97,31 @@ namespace FPTBook.Controllers
             Session.Clear();//remove session
             return RedirectToAction("Index", "Home");
         }
-        public ActionResult Delete(int? id)
+        public ActionResult Delete(string username)
         {
             if (Session["admin"] == null)
             {
                 return RedirectToAction("Index", "Home");
             }
-            if (id == null)
+            if (username == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            account customer = db.accounts.Find(id);
-            if (customer == null)
+            account account = db.accounts.Find(username);
+            if (account == null)
             {
                 return HttpNotFound();
             }
-            return View(customer);
+            return View(account);
         }
 
         // POST: customers/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
+        public ActionResult DeleteConfirmed(string username)
         {
-            account customer = db.accounts.Find(id);
-            db.accounts.Remove(customer);
+            account account = db.accounts.Find(username);
+            db.accounts.Remove(account);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

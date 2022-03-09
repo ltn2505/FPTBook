@@ -7,9 +7,8 @@
       <Schema Namespace="FPTBookModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="account">
           <Key>
-            <PropertyRef Name="acc_id" />
+            <PropertyRef Name="acc_name" />
           </Key>
-          <Property Name="acc_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="acc_name" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="password" Type="nvarchar" MaxLength="20" Nullable="false" />
           <Property Name="full_name" Type="nvarchar" MaxLength="50" Nullable="false" />
@@ -44,7 +43,7 @@
             <PropertyRef Name="order_id" />
           </Key>
           <Property Name="order_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="acc_id" Type="int" Nullable="false" />
+          <Property Name="acc_name" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="receiver_name" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="phone" Type="nvarchar" MaxLength="15" Nullable="false" />
           <Property Name="order_date" Type="datetime" Nullable="false" />
@@ -56,7 +55,7 @@
             <PropertyRef Name="order_id" />
             <PropertyRef Name="book_id" />
           </Key>
-          <Property Name="order_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="order_id" Type="int" Nullable="false" />
           <Property Name="book_id" Type="nvarchar" MaxLength="10" Nullable="false" />
           <Property Name="quantity" Type="int" Nullable="false" />
           <Property Name="price" Type="int" Nullable="false" />
@@ -83,15 +82,15 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_order_account">
+        <Association Name="FK_order_account1">
           <End Role="account" Type="Self.account" Multiplicity="1" />
           <End Role="order" Type="Self.order" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="account">
-              <PropertyRef Name="acc_id" />
+              <PropertyRef Name="acc_name" />
             </Principal>
             <Dependent Role="order">
-              <PropertyRef Name="acc_id" />
+              <PropertyRef Name="acc_name" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -130,7 +129,7 @@
             <End Role="category" EntitySet="category" />
             <End Role="book" EntitySet="book" />
           </AssociationSet>
-          <AssociationSet Name="FK_order_account" Association="Self.FK_order_account">
+          <AssociationSet Name="FK_order_account1" Association="Self.FK_order_account1">
             <End Role="account" EntitySet="account" />
             <End Role="order" EntitySet="order" />
           </AssociationSet>
@@ -150,9 +149,8 @@
       <Schema Namespace="FPTBookModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityType Name="account">
           <Key>
-            <PropertyRef Name="acc_id" />
+            <PropertyRef Name="acc_name" />
           </Key>
-          <Property Name="acc_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="acc_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="password" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="full_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
@@ -160,7 +158,7 @@
           <Property Name="email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="address" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="state" Type="String" MaxLength="10" FixedLength="true" Unicode="false" />
-          <NavigationProperty Name="orders" Relationship="Self.FK_order_account" FromRole="account" ToRole="order" />
+          <NavigationProperty Name="orders" Relationship="Self.FK_order_account1" FromRole="account" ToRole="order" />
         </EntityType>
         <EntityType Name="book">
           <Key>
@@ -191,13 +189,13 @@
             <PropertyRef Name="order_id" />
           </Key>
           <Property Name="order_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="acc_id" Type="Int32" Nullable="false" />
+          <Property Name="acc_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="receiver_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="phone" Type="String" MaxLength="15" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="order_date" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="delivery_address" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="total_price" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="account" Relationship="Self.FK_order_account" FromRole="order" ToRole="account" />
+          <NavigationProperty Name="account" Relationship="Self.FK_order_account1" FromRole="order" ToRole="account" />
           <NavigationProperty Name="order_detail" Relationship="Self.FK_order_detail_order" FromRole="order" ToRole="order_detail" />
         </EntityType>
         <EntityType Name="order_detail">
@@ -205,7 +203,7 @@
             <PropertyRef Name="order_id" />
             <PropertyRef Name="book_id" />
           </Key>
-          <Property Name="order_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="order_id" Type="Int32" Nullable="false" />
           <Property Name="book_id" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="quantity" Type="Int32" Nullable="false" />
           <Property Name="price" Type="Int32" Nullable="false" />
@@ -222,15 +220,15 @@
           <Property Name="version" Type="Int32" />
           <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
         </EntityType>
-        <Association Name="FK_order_account">
+        <Association Name="FK_order_account1">
           <End Role="account" Type="Self.account" Multiplicity="1" />
           <End Role="order" Type="Self.order" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="account">
-              <PropertyRef Name="acc_id" />
+              <PropertyRef Name="acc_name" />
             </Principal>
             <Dependent Role="order">
-              <PropertyRef Name="acc_id" />
+              <PropertyRef Name="acc_name" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -277,7 +275,7 @@
           <EntitySet Name="orders" EntityType="Self.order" />
           <EntitySet Name="order_detail" EntityType="Self.order_detail" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
-          <AssociationSet Name="FK_order_account" Association="Self.FK_order_account">
+          <AssociationSet Name="FK_order_account1" Association="Self.FK_order_account1">
             <End Role="account" EntitySet="accounts" />
             <End Role="order" EntitySet="orders" />
           </AssociationSet>
@@ -303,7 +301,6 @@
           <EntitySetMapping Name="accounts">
             <EntityTypeMapping TypeName="FPTBookModel.account">
               <MappingFragment StoreEntitySet="account">
-                <ScalarProperty Name="acc_id" ColumnName="acc_id" />
                 <ScalarProperty Name="acc_name" ColumnName="acc_name" />
                 <ScalarProperty Name="password" ColumnName="password" />
                 <ScalarProperty Name="full_name" ColumnName="full_name" />
@@ -341,7 +338,7 @@
             <EntityTypeMapping TypeName="FPTBookModel.order">
               <MappingFragment StoreEntitySet="order">
                 <ScalarProperty Name="order_id" ColumnName="order_id" />
-                <ScalarProperty Name="acc_id" ColumnName="acc_id" />
+                <ScalarProperty Name="acc_name" ColumnName="acc_name" />
                 <ScalarProperty Name="receiver_name" ColumnName="receiver_name" />
                 <ScalarProperty Name="phone" ColumnName="phone" />
                 <ScalarProperty Name="order_date" ColumnName="order_date" />

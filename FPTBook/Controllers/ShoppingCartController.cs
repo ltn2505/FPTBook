@@ -58,9 +58,9 @@ namespace FPTBook.Controllers
             {
                 Cart cart = Session["Cart"] as Cart;
                 order _order = new order();
-                
+
                 _order.order_date = DateTime.Now;
-                _order.acc_id = int.Parse(form["AccID"]);
+                _order.acc_name = form["AccName"];
                 _order.receiver_name = form["ReName"];
                 _order.phone = form["Phone"];
                 _order.delivery_address = form["DeAddress"];

@@ -50,8 +50,8 @@
             @Html.DisplayFor(modelItem => item.address)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.acc_id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.acc_id })
+            @Html.ActionLink("Edit", "Edit", new { username=item.acc_name }) |
+            @Html.ActionLink("Delete", "Delete", new { username = item.acc_name })
         </td>
     </tr>
 }
