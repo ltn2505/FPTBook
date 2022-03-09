@@ -18,9 +18,9 @@ namespace FPTBook.Models
         {
             get { return items; }
         }
-        public void Add(book _pro,int _quantity = 1)
+        public void Add(book _pro, int _quantity = 1)
         {
-            var item=items.FirstOrDefault(s=>s._shopping_product.book_id==_pro.book_id);
+            var item = items.FirstOrDefault(s => s._shopping_product.book_id == _pro.book_id);
             if (item == null)
             {
                 items.Add(new CartItem
@@ -33,14 +33,14 @@ namespace FPTBook.Models
             {
                 item._shopping_quantity += _quantity;
             }
-            
+
         }
         public void Update_Quantity(string id, int quantity)
         {
             var item = items.Find(s => s._shopping_product.book_id == id);
-            if(item != null)
+            if (item != null)
             {
-                item._shopping_quantity=quantity;
+                item._shopping_quantity = quantity;
             }
         }
         public double Total_Money()
@@ -56,6 +56,6 @@ namespace FPTBook.Models
         {
             items.Clear();
         }
-       
+
     }
 }

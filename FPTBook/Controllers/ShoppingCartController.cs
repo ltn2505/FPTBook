@@ -16,14 +16,14 @@ namespace FPTBook.Controllers
             if (cart == null || Session["Cart"] == null)
             {
                 cart = new Cart();
-                Session["Cart"]=cart;
+                Session["Cart"] = cart;
             }
             return cart;
         }
         public ActionResult AddCart(string id)
         {
-            var pro=db.books.SingleOrDefault(s=>s.book_id==id);
-            if(pro != null)
+            var pro = db.books.SingleOrDefault(s => s.book_id == id);
+            if (pro != null)
             {
                 GetCart().Add(pro);
             }
@@ -58,8 +58,9 @@ namespace FPTBook.Controllers
             {
                 Cart cart = Session["Cart"] as Cart;
                 order _order = new order();
-                _order.acc_id = int.Parse(form["AccId"]);
+                
                 _order.order_date = DateTime.Now;
+                _order.acc_id = int.Parse(form["AccID"]);
                 _order.receiver_name = form["ReName"];
                 _order.phone = form["Phone"];
                 _order.delivery_address = form["DeAddress"];
