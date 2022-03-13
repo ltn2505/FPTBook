@@ -1,0 +1,63 @@
+﻿@model IEnumerable<FPTBook.Models.order>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.receiver_name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.phone)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.order_date)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.delivery_address)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.total_price)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.account.password)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.receiver_name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.phone)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.order_date)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.delivery_address)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.total_price)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.account.password)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.order_id }) |
+            @Html.ActionLink("Details", "Details", new { id=item.order_id }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.order_id })
+        </td>
+    </tr>
+}
+
+</table>

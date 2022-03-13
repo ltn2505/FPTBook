@@ -12,7 +12,7 @@ namespace FPTBook.Controllers
 {
     public class BookController : Controller
     {
-        private FPTBookEntities1 db = new FPTBookEntities1();
+        private FPTBookEntities3 db = new FPTBookEntities3();
         // GET: Book
         public ActionResult Index()
         {

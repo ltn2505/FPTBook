@@ -12,7 +12,7 @@ namespace FPTBook.Controllers
     public class CategoryController : Controller
     {
         // GET: Category
-        private FPTBookEntities1 db = new FPTBookEntities1();
+        private FPTBookEntities3 db = new FPTBookEntities3();
         public ActionResult Index()
         {
             if (Session["admin"] == null)

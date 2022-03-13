@@ -9,7 +9,7 @@ namespace FPTBook.Controllers
 {
     public class ShoppingCartController : Controller
     {
-        private FPTBookEntities1 db = new FPTBookEntities1();
+        private FPTBookEntities3 db = new FPTBookEntities3();
         public Cart GetCart()
         {
             Cart cart = Session["Cart"] as Cart;
@@ -92,6 +92,18 @@ namespace FPTBook.Controllers
             {
                 return Content("Error order!");
             }
+        }
+        public PartialViewResult BagCart()
+        {
+            int total_item = 0;
+
+            Cart cart = Session["Cart"] as Cart;
+
+            if (cart != null)
+                total_item = cart.TotalQuantity();
+            ViewBag.TotalItems = total_item;
+
+            return PartialView("BagCart");
         }
         public ActionResult OrderSuccess()
         {

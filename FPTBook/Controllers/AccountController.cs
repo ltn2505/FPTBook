@@ -12,7 +12,7 @@ namespace FPTBook.Controllers
 {
     public class AccountController : Controller
     {
-        private FPTBookEntities1 db = new FPTBookEntities1();
+        private FPTBookEntities3 db = new FPTBookEntities3();
         // GET: Account
         public ActionResult Index()
         {
@@ -28,15 +28,15 @@ namespace FPTBook.Controllers
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "acc_name,password,full_name,gender,email,address")] account account)
+        public ActionResult Create(account account)
         {
             if (ModelState.IsValid)
             {
                 db.accounts.Add(account);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Index","Home");
             }
-            return View(account);
+            return View();
         }
         public ActionResult Login()
         {
@@ -57,7 +57,7 @@ namespace FPTBook.Controllers
                     if (data.FirstOrDefault().state!=null)
                     {
                         Session["admin"] = "admin";
-                        return RedirectToAction("Index", "Account");
+                        return RedirectToAction("Index", "Home");
                     }
                     else
                     {

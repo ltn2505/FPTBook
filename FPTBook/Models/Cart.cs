@@ -48,6 +48,10 @@ namespace FPTBook.Models
             var total = items.Sum(s => s._shopping_product.book_price * s._shopping_quantity);
             return total;
         }
+        public int TotalQuantity()
+        {
+            return items.Sum(s => s._shopping_quantity);
+        }
         public void DeleteProduct(string id)
         {
             items.RemoveAll(s => s._shopping_product.book_id == id);

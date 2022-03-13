@@ -5,13 +5,13 @@
 <link href="~/Content/Css/home.css" rel="stylesheet" />
 
     <div class="container">
-        <div class="row">
+        <div class="row" style="margin-top: 50px;">
             @foreach (var item in Model)
             {
             <div class="col-12 col-sm-6 col-md-4">
                 <img src="~/Content/images/@item.book_picture" loading="eager" />
                 <p>@Html.DisplayFor(modelItem => item.book_name)</p>
-                <p>Price: @Html.DisplayFor(modelItem => item.book_price) $ 
+                <p style="margin: 0 0 0px;">Price: @Html.DisplayFor(modelItem => item.book_price) $ 
                     <a href="/ShoppingCart/AddCart/@item.book_id"><img src="~/Content/images/shopping_cart.png" loading="eager" style="height:30px;width:30px;" /></a> 
                 </p>
                 

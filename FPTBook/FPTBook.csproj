@@ -52,6 +52,7 @@
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.4.4\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.Build.Framework" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -133,6 +134,7 @@
     <Compile Include="Controllers\BookController.cs" />
     <Compile Include="Controllers\CategoryController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\OrderController.cs" />
     <Compile Include="Controllers\ShoppingCartController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -254,6 +256,9 @@
     <Content Include="Views\Category\Delete.cshtml" />
     <Content Include="Views\ShoppingCart\ShowCart.cshtml" />
     <Content Include="Views\ShoppingCart\OrderSuccess.cshtml" />
+    <Content Include="Views\Order\Index.cshtml" />
+    <Content Include="Views\ShoppingCart\BagCart.cshtml" />
+    <Content Include="Views\Order\Details.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

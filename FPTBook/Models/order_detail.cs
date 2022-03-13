@@ -14,6 +14,7 @@ namespace FPTBook.Models
     
     public partial class order_detail
     {
+        public int id_details { get; set; }
         public int order_id { get; set; }
         public string book_id { get; set; }
         public int quantity { get; set; }

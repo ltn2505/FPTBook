@@ -9,7 +9,7 @@ namespace FPTBook.Controllers
 {
     public class HomeController : Controller
     {
-        private FPTBookEntities1 db = new FPTBookEntities1();
+        private FPTBookEntities3 db = new FPTBookEntities3();
         public ActionResult Index()
         {
             return View(db.books.ToList());
@@ -27,6 +27,11 @@ namespace FPTBook.Controllers
             ViewBag.Message = "Your contact page.";
 
             return View();
+        }
+        public ActionResult BookDetail(string id)
+        {
+            var books = db.books.ToList().Find(a => a.book_id == id);
+            return View(books);
         }
     }
 }

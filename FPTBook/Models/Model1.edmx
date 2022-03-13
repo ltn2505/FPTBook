@@ -52,9 +52,9 @@
         </EntityType>
         <EntityType Name="order_detail">
           <Key>
-            <PropertyRef Name="order_id" />
-            <PropertyRef Name="book_id" />
+            <PropertyRef Name="id_details" />
           </Key>
+          <Property Name="id_details" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="order_id" Type="int" Nullable="false" />
           <Property Name="book_id" Type="nvarchar" MaxLength="10" Nullable="false" />
           <Property Name="quantity" Type="int" Nullable="false" />
@@ -94,7 +94,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_order_detail_book">
+        <Association Name="FK_order_detail_book1">
           <End Role="book" Type="Self.book" Multiplicity="1" />
           <End Role="order_detail" Type="Self.order_detail" Multiplicity="*" />
           <ReferentialConstraint>
@@ -133,7 +133,7 @@
             <End Role="account" EntitySet="account" />
             <End Role="order" EntitySet="order" />
           </AssociationSet>
-          <AssociationSet Name="FK_order_detail_book" Association="Self.FK_order_detail_book">
+          <AssociationSet Name="FK_order_detail_book1" Association="Self.FK_order_detail_book1">
             <End Role="book" EntitySet="book" />
             <End Role="order_detail" EntitySet="order_detail" />
           </AssociationSet>
@@ -173,7 +173,7 @@
           <Property Name="book_author" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="book_description" Type="String" MaxLength="500" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="category" Relationship="Self.FK_book_category" FromRole="book" ToRole="category" />
-          <NavigationProperty Name="order_detail" Relationship="Self.FK_order_detail_book" FromRole="book" ToRole="order_detail" />
+          <NavigationProperty Name="order_detail" Relationship="Self.FK_order_detail_book1" FromRole="book" ToRole="order_detail" />
         </EntityType>
         <EntityType Name="category">
           <Key>
@@ -200,14 +200,14 @@
         </EntityType>
         <EntityType Name="order_detail">
           <Key>
-            <PropertyRef Name="order_id" />
-            <PropertyRef Name="book_id" />
+            <PropertyRef Name="id_details" />
           </Key>
+          <Property Name="id_details" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="order_id" Type="Int32" Nullable="false" />
           <Property Name="book_id" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="quantity" Type="Int32" Nullable="false" />
           <Property Name="price" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="book" Relationship="Self.FK_order_detail_book" FromRole="order_detail" ToRole="book" />
+          <NavigationProperty Name="book" Relationship="Self.FK_order_detail_book1" FromRole="order_detail" ToRole="book" />
           <NavigationProperty Name="order" Relationship="Self.FK_order_detail_order" FromRole="order_detail" ToRole="order" />
         </EntityType>
         <EntityType Name="sysdiagram">
@@ -244,7 +244,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_order_detail_book">
+        <Association Name="FK_order_detail_book1">
           <End Role="book" Type="Self.book" Multiplicity="1" />
           <End Role="order_detail" Type="Self.order_detail" Multiplicity="*" />
           <ReferentialConstraint>
@@ -268,7 +268,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="FPTBookEntities1" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="FPTBookEntities3" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="accounts" EntityType="Self.account" />
           <EntitySet Name="books" EntityType="Self.book" />
           <EntitySet Name="categories" EntityType="Self.category" />
@@ -283,7 +283,7 @@
             <End Role="category" EntitySet="categories" />
             <End Role="book" EntitySet="books" />
           </AssociationSet>
-          <AssociationSet Name="FK_order_detail_book" Association="Self.FK_order_detail_book">
+          <AssociationSet Name="FK_order_detail_book1" Association="Self.FK_order_detail_book1">
             <End Role="book" EntitySet="books" />
             <End Role="order_detail" EntitySet="order_detail" />
           </AssociationSet>
@@ -297,7 +297,7 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="FPTBookModelStoreContainer" CdmEntityContainer="FPTBookEntities1">
+        <EntityContainerMapping StorageEntityContainer="FPTBookModelStoreContainer" CdmEntityContainer="FPTBookEntities3">
           <EntitySetMapping Name="accounts">
             <EntityTypeMapping TypeName="FPTBookModel.account">
               <MappingFragment StoreEntitySet="account">
@@ -350,6 +350,7 @@
           <EntitySetMapping Name="order_detail">
             <EntityTypeMapping TypeName="FPTBookModel.order_detail">
               <MappingFragment StoreEntitySet="order_detail">
+                <ScalarProperty Name="id_details" ColumnName="id_details" />
                 <ScalarProperty Name="order_id" ColumnName="order_id" />
                 <ScalarProperty Name="book_id" ColumnName="book_id" />
                 <ScalarProperty Name="quantity" ColumnName="quantity" />

@@ -8,6 +8,35 @@
     @Scripts.Render("~/bundles/modernizr")
     <link href="~/Content/Css/layout.css" rel="stylesheet" />
 </head>
+<style>
+    a{
+        color: white;
+        text-decoration: none;
+    }
+    .form-control:focus {
+        box-shadow: none;
+    }
+
+    .form-control-underlined {
+        border-width: 0;
+        border-bottom-width: 1px;
+        border-radius: 0;
+        padding-left: 0;
+    }
+
+    body {
+        background: #ffd89b;
+        background: -webkit-linear-gradient(to right, #ffd89b, #19547b);
+        background: linear-gradient(to right, #ffd89b, #19547b);
+        min-height: 100vh;
+    }
+
+    .form-control::placeholder {
+        font-size: 0.95rem;
+        color: #aaa;
+        font-style: italic;
+    }
+</style>
 <body>
     <div class="navbar navbar-inverse navbar-fixed-top">
         <div class="container">
@@ -17,7 +46,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                @Html.ActionLink("FPTBook", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                @Html.ActionLink("FPTBook", "Index", "Home", new { area = "" }, new { @class = "navbar-brand"})
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
@@ -25,7 +54,7 @@
                     {
                         <li>@Html.ActionLink("Category", "Index", "Category")</li>
                         <li>@Html.ActionLink("Book", "Index", "Book")</li>
-                        <li>@Html.ActionLink("Order", "Contact", "Home")</li>
+                        <li>@Html.ActionLink("Order", "Index", "Order")</li>
                     }
                     else
                     {
@@ -33,20 +62,21 @@
                         <li>@Html.ActionLink("About", "About", "Home")</li>
                         <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
                     }
-
+        
                 </ul>
-                <ul class="nav navbar-nav accright" style="float:right">
+                <ul class="nav navbar-nav accright" style="float:right;color:white;">
+                    
+                    <li class="nav-item"><a class="nav-link" data-bss-hover-animate="pulse" href="@Url.Action("ShowCart", "ShoppingCart")"><i class="glyphicon glyphicon-shopping-cart" style="margin-right:5px;"></i>Cart ( @Html.Action("BagCart","ShoppingCart"))</a></li>
                     @if (Session["username"] != null)
                     {
-                        <li>@Html.ActionLink("Cart", "ShowCart", "ShoppingCart")</li>
-                        <li>@Html.ActionLink("Hi!, " + Session["username"], "Edit", "Account")</li>
-                        <li>@Html.ActionLink("Logout", "Logout", "Account")</li>
+
+                        <li><i class="glyphicon glyphicon-user" style="margin-top: 15px; margin-right:8px;"> @Html.ActionLink("Hi!," + Session["username"], "Edit", "Account")</i></li>
+                        <li><i class="glyphicon glyphicon-off" style="margin-top: 15px; margin-right:8px;"> @Html.ActionLink("Logout", "Logout", "Account")</i></li>
                     }
                     else
                     {
-                        <li>@Html.ActionLink("Cart", "ShowCart", "ShoppingCart")</li>
-                        <li>@Html.ActionLink("Login", "Login", "Account")</li>
-                        <li>@Html.ActionLink("Register", "Create", "Account")</li>
+                        <li><i class="glyphicon glyphicon-log-in" style="margin-top: 15px; margin-right:8px;"> @Html.ActionLink("Login", "Login", "Account")</i></li>
+                        <li><i class="glyphicon glyphicon-user" style="margin-top: 15px; margin-right:8px;"> @Html.ActionLink("Register", "Create", "Account")</i></li>
                     }
 
                 </ul>

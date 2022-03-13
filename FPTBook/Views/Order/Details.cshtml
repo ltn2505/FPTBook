@@ -1,0 +1,59 @@
+﻿@model FPTBook.Models.order
+
+@{
+    ViewBag.Title = "Details";
+}
+
+
+<div class="container-fluid">
+    <div class="card shadow" style="box-shadow: 0px 0px;">
+        <div class="card-header py-3">
+            <p class="text-center text-primary m-0 fw-bold" style="font-size: 24px;">Orders Detail</p>
+            @Html.ActionLink("Back", "Index", "Order", null, new { @class = "btn btn-danger", @style = "width: 172.6875px;margin-left: 43%;margin-bottom: 2%;" })
+            @using (Html.BeginForm("Details", "Order", FormMethod.Post))
+            {
+
+                @Html.AntiForgeryToken()
+        <ul class="list-group">
+            @Html.HiddenFor(a => a.order_id)
+            <li class="list-group-item"><span><b>Name:</b> <span style="font-size:23px">@Html.DisplayFor(a => a.account.full_name)</span></span></li>
+            <li class="list-group-item"><span><b>Delivery address:</b> <span style="font-size:23px">@Html.DisplayFor(a => a.delivery_address)</span></span></li>
+            <li class="list-group-item"><span><b>Phone number:</b> <span style="font-size:23px">@Html.DisplayFor(a => a.phone)</span></span></li>
+            <li class="list-group-item"><span><b>Order date:</b> <span style="font-size:23px">@Html.DisplayFor(a => a.order_date)</span></span></li>
+            <li class="list-group-item"><span><b>Total Price:</b> <span style="font-size:23px">@Html.DisplayFor(a => a.total_price)</span></span></li>
+        </ul>
+            }
+            <div style="padding-left: 43%;"></div>
+        </div>
+        <div class="card-body" style="border-style: ridge;border-radius: 19px;filter: contrast(56%);">
+            <div class="table-responsive table mt-2" id="dataTable-1" role="grid" aria-describedby="dataTable_info">
+                <table class="table table-hover table-sm my-0" id="dataTable">
+                    <thead>
+                        <tr>
+                            <th style="width: 80px"></th>
+                            <th style="text-align: center;">Book name</th>
+                            <th style="text-align: center;">Price</th>
+                            <th style="text-align: center;">Quantity</th>
+                            <th style="text-align: center;">Total</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model.order_detail)
+                        {
+                            <tr>
+                                <td style="text-align: center"><img src="~/Content/images/@item.book.book_picture" style="width: 70px;height: 80px;"></td>
+                                <td style="text-align: center;color: rgb(0,0,0);font-weight: bold;">@item.book.book_name</td>
+                                <td style="color: rgb(0,0,0);font-weight: bold;text-align: center;">$ @item.book.book_price</td>
+                                <td style="text-align: center;color: rgb(0,0,0);font-weight: bold;">@item.quantity</td>
+                                <td style="color: rgb(0,0,0);font-weight: bold;text-align: center;">@item.price</td>
+                            </tr>
+                        }
+                        
+                        <tr></tr>
+                        <tr></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
