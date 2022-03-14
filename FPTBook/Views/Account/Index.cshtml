@@ -27,33 +27,36 @@
             @Html.DisplayNameFor(model => model.address)
         </th>
         <th></th>
+        <th></th>
     </tr>
 
 @foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.acc_name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.password)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.full_name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.gender)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.email)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.address)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { username=item.acc_name }) |
-            @Html.ActionLink("Delete", "Delete", new { username = item.acc_name })
-        </td>
-    </tr>
+<tr>
+    <td>
+        @Html.DisplayFor(modelItem => item.acc_name)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.password)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.full_name)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.gender)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.email)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.address)
+    </td>
+    <td style="text-align: center;">
+        <div>@Html.ActionLink(" ", "Edit", new { id = item.acc_name }, new { @class = "glyphicon glyphicon-pencil", @style = "font-size: 20px;color: rgb(1,1,1);text-decoration:none" })</div>
+    </td>
+    <td style="text-align: center;">
+        <div>@Html.ActionLink(" ", "Delete", new { id = item.acc_name }, new { @class = "glyphicon glyphicon-remove", @style = "font-size: 20px;color: rgb(1,1,1);text-decoration:none" })</div>
+    </td>
+</tr>
 }
 
 </table>

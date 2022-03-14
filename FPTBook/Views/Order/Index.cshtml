@@ -4,11 +4,8 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
+<h2>Order</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
 <table class="table">
     <tr>
         <th>
@@ -26,38 +23,35 @@
         <th>
             @Html.DisplayNameFor(model => model.total_price)
         </th>
-        <th>
-            @Html.DisplayNameFor(model => model.account.password)
-        </th>
+        <th></th>
+        <th></th>
         <th></th>
     </tr>
 
 @foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.receiver_name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.phone)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.order_date)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.delivery_address)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.total_price)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.account.password)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.order_id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.order_id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.order_id })
-        </td>
-    </tr>
+<tr>
+    <td>
+        @Html.DisplayFor(modelItem => item.receiver_name)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.phone)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.order_date)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.delivery_address)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.total_price)
+    </td>
+    <td style="text-align: center;">
+        <div>@Html.ActionLink(" ", "Details", new { id = item.order_id }, new { @class = "glyphicon glyphicon-info-sign", @style = "font-size: 20px;color: rgb(1,1,1);text-decoration:none" })</div>
+    </td>
+    <td style="text-align: center;">
+        <div>@Html.ActionLink(" ", "Delete", new { id = item.order_id }, new { @class = "glyphicon glyphicon-remove", @style = "font-size: 20px;color: rgb(1,1,1);text-decoration:none" })</div>
+    </td>
+</tr>
 }
 
 </table>

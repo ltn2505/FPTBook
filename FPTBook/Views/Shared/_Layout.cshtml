@@ -52,6 +52,7 @@
                 <ul class="nav navbar-nav">
                     @if (Session["admin"] != null)
                     {
+                        <li>@Html.ActionLink("User", "Index", "Account")</li>
                         <li>@Html.ActionLink("Category", "Index", "Category")</li>
                         <li>@Html.ActionLink("Book", "Index", "Book")</li>
                         <li>@Html.ActionLink("Order", "Index", "Order")</li>
@@ -59,10 +60,10 @@
                     else
                     {
                         <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                        <li>@Html.ActionLink("About", "About", "Home")</li>
+                        <li>@Html.ActionLink("Order History", "OrderHistory", "ShoppingCart")</li>
                         <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
                     }
-        
+
                 </ul>
                 <ul class="nav navbar-nav accright" style="float:right;color:white;">
                     

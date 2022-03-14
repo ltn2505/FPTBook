@@ -1,9 +1,10 @@
 ﻿@model FPTBook.Models.Cart
+
 @{
     ViewBag.Title = "ShowCart";
 }
 
-<h2>ShowCart</h2>
+<h2>Cart</h2>
 @if (Model != null)
 {
     <table class="table">
@@ -62,7 +63,7 @@
                             <tr>
                                 <td>Account name</td>
                                 <td>
-                                    <input type="text" name="AccName" value="@Session["username"]" readonly=""/>
+                                    <input type="text" name="AccName" value="@Session["username"]" readonly="" />
                                 </td>
                                 <td></td>
                             </tr>
@@ -112,4 +113,7 @@
     <div>
         @Html.ActionLink("Back to home page", "Index", "Home")
     </div>
+}
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
 }

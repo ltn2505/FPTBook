@@ -22,31 +22,35 @@ namespace FPTBook.Models
         }
         [Required(ErrorMessage = "User name cannot be left blank")]
         [Display(Name = "User name")]
+        [StringLength(10, MinimumLength = 3)]
         public string acc_name { get; set; }
         [Display(Name = "Password")]
         [Required(ErrorMessage = "Password cannot be left blank")]
-        [MinLength(8)]
+        [StringLength(20, MinimumLength = 8)]
         [DataType(DataType.Password)]
         public string password { get; set; }
         [Display(Name = "Confirm password")]
         [Required(ErrorMessage = "Confirm password cannot be left blank")]
         [DataType(DataType.Password)]
         [Compare("password", ErrorMessage = "The new password and confirmation new password do not match.")]
+        [StringLength(20, MinimumLength = 8)]
         public string confirmpass { get; set; }
         [Display(Name = "Full name")]
         [Required(ErrorMessage = "Full name be left blank")]
+        [StringLength(20, MinimumLength = 5)]
         public string full_name { get; set; }
         [Display(Name = "Gender")]
         [Required(ErrorMessage = "Gender be left blank")]
         public string gender { get; set; }
         [Display(Name = "Email")]
         [Required(ErrorMessage = "Email cannot be left blank")]
-        [EmailAddress(ErrorMessage = "Not an email address")]
+        [EmailAddress(ErrorMessage = "Email address is invalid")]
+        [StringLength(50, MinimumLength = 8)]
         [RegularExpression("^[a-zA-Z0-9_\\.-]+@([a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,6}$", ErrorMessage = "Email address is invalid")]
         public string email { get; set; }
         [Display(Name = "Address")]
         [Required(ErrorMessage = "Address cannot be left blank")]
-        
+        [StringLength(100, MinimumLength = 3)]
         public string address { get; set; }
 
         public string state { get; set; }

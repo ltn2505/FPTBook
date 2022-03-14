@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Web;
 using System.Web.Mvc;
 
@@ -33,7 +34,7 @@ namespace FPTBook.Controllers
         {
             if (Session["Cart"] == null)
             {
-                return RedirectToAction("ShowCart", "ShoppingCart");
+                return View("ShowCart", "ShoppingCart");
             }
             Cart cart = Session["Cart"] as Cart;
             return View(cart);
@@ -108,6 +109,25 @@ namespace FPTBook.Controllers
         public ActionResult OrderSuccess()
         {
             return View();
+        }
+        public ActionResult OrderHistory(string id)
+        {
+            id= (string)Session["username"];
+            if (Session["username"] != null)
+            {
+                var orderHis = db.orders.ToList().Where(s => s.acc_name == id);
+
+                if (id == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+                if (orderHis == null)
+                {
+                    return HttpNotFound();
+                }
+                return View(orderHis.ToList().OrderByDescending(o => o.order_date));
+            }
+            return View("ErrorCart");
         }
     }
 }

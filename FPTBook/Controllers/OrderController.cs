@@ -23,8 +23,7 @@ namespace FPTBook.Controllers
 
         public ActionResult Details(int? id)
         {
-            if (Session["Admin"] != null)
-            {
+           
                 if (id == null)
                 {
                     return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -35,8 +34,7 @@ namespace FPTBook.Controllers
                     return HttpNotFound();
                 }
                 return View(order);
-            }
-            return View("Error");
+           
         }
 
         [HttpPost]
@@ -49,7 +47,7 @@ namespace FPTBook.Controllers
                 db.Entry(order).Property(e => e.order_id).IsModified = true;
 
                 db.SaveChanges();
-                if (Session["Admin"] != null)
+                if (Session["admin"] != null)
                 {
                     return RedirectToAction("Index");
                 }
@@ -59,6 +57,44 @@ namespace FPTBook.Controllers
                 }
             }
             return View();
+        }
+        public ActionResult Delete(int id)
+        {
+            if (Session["admin"] == null)
+            {
+                return RedirectToAction("Index", "Home");
+            }
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            order order = db.orders.Find(id);
+            if (order == null)
+            {
+                return HttpNotFound();
+            }
+            return View(order);
+        }
+
+
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public ActionResult DeleteConfirmed(int id)
+        {
+            order order = db.orders.Find(id);
+
+            foreach (var item in db.order_detail)
+            {
+                if (item.order_id == id)
+                {
+                    db.order_detail.Remove(item);
+                }
+            }
+            
+                       
+            db.orders.Remove(order);
+            db.SaveChanges();
+            return RedirectToAction("Index");
         }
     }
 }

@@ -34,7 +34,8 @@ namespace FPTBook.Controllers
             {
                 db.accounts.Add(account);
                 db.SaveChanges();
-                return RedirectToAction("Index","Home");
+                Response.Write("<script>alert('Register new account success!')</script>");
+                return RedirectToAction("Login","Account");
             }
             return View();
         }
@@ -51,7 +52,7 @@ namespace FPTBook.Controllers
             {
                 var data = db.accounts.Where(e => e.acc_name.Equals(acc_name) && e.password.Equals(password)).ToList();
 
-                if (data!=null)
+                if (data.Count()>0)
                 {
                     Session["username"] = acc_name;
                     if (data.FirstOrDefault().state!=null)
@@ -71,9 +72,10 @@ namespace FPTBook.Controllers
             }
             return View();
         }
-        public ActionResult Edit()
+        public ActionResult Edit(string id)
         {
-            account objAccount = db.accounts.ToList().Find(a => a.acc_name.Equals(Session["username"]));
+            id = (string)Session["username"];
+            account objAccount = db.accounts.ToList().Find(a => a.acc_name.Equals(id));
             if (objAccount == null)
             {
                 return HttpNotFound();
@@ -82,32 +84,40 @@ namespace FPTBook.Controllers
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "acc_name,password,full_name,gender,email,address,state")] account account)
+        public ActionResult Edit([Bind(Include = "acc_name,password,confirmpass,full_name,gender,email,address,state")] account account)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(account).State = EntityState.Modified;
+                db.accounts.Attach(account);
+
+                db.Entry(account).Property(a => a.full_name).IsModified = true;
+                db.Entry(account).Property(a => a.gender).IsModified = true;
+                db.Entry(account).Property(a => a.email).IsModified = true;
+                db.Entry(account).Property(a => a.address).IsModified = true;
+
                 db.SaveChanges();
-                return RedirectToAction("Index","Home");
+
+                Response.Write("<script>alert('Update information success!');window.location='/';</script>");
             }
             return View(account);
         }
+
         public ActionResult Logout()
         {
             Session.Clear();//remove session
             return RedirectToAction("Index", "Home");
         }
-        public ActionResult Delete(string username)
+        public ActionResult Delete(string id)
         {
             if (Session["admin"] == null)
             {
                 return RedirectToAction("Index", "Home");
             }
-            if (username == null)
+            if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            account account = db.accounts.Find(username);
+            account account = db.accounts.Find(id);
             if (account == null)
             {
                 return HttpNotFound();
@@ -115,12 +125,12 @@ namespace FPTBook.Controllers
             return View(account);
         }
 
-        // POST: customers/Delete/5
+ 
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(string username)
+        public ActionResult DeleteConfirmed(string id)
         {
-            account account = db.accounts.Find(username);
+            account account = db.accounts.Find(id);
             db.accounts.Remove(account);
             db.SaveChanges();
             return RedirectToAction("Index");

@@ -21,6 +21,7 @@
             @Html.DisplayNameFor(model => model.cate_description)
         </th>
         <th></th>
+        <th></th>
     </tr>
 
 @foreach (var item in Model) {
@@ -34,9 +35,11 @@
     <td>
         @Html.DisplayFor(modelItem => item.cate_description)
     </td>
-    <td>
-        @Html.ActionLink("Edit", "Edit", new { id = item.cate_id }) |
-        @Html.ActionLink("Delete", "Delete", new { id = item.cate_id })
+    <td style="text-align: center;">
+        <div>@Html.ActionLink(" ", "Edit", new { id = item.cate_id }, new { @class = "glyphicon glyphicon-pencil", @style = "font-size: 20px;color: rgb(1,1,1);text-decoration:none" })</div>
+    </td>
+    <td style="text-align: center;">
+        <div>@Html.ActionLink(" ", "Delete", new { id = item.cate_id }, new { @class = "glyphicon glyphicon-remove", @style = "font-size: 20px;color: rgb(1,1,1);text-decoration:none" })</div>
     </td>
 </tr>
 }

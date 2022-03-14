@@ -33,6 +33,7 @@
             @Html.DisplayNameFor(model => model.category.cate_name)
         </th>
         <th></th>
+        <th></th>
     </tr>
 
 @foreach (var item in Model) {
@@ -54,15 +55,17 @@
     <td>
         @Html.DisplayFor(modelItem => item.book_author)
     </td>
-    <td>
+    <td style="width:500px;">
         @Html.DisplayFor(modelItem => item.book_description)
     </td>
     <td>
         @Html.DisplayFor(modelItem => item.category.cate_name)
     </td>
-    <td>
-        @Html.ActionLink("Edit", "Edit", new { id = item.book_id }) |
-        @Html.ActionLink("Delete", "Delete", new { id = item.book_id })
+    <td style="text-align: center;">
+        <div>@Html.ActionLink(" ", "Edit", new { id = item.book_id }, new { @class = "glyphicon glyphicon-pencil", @style = "font-size: 20px;color: rgb(1,1,1);text-decoration:none" })</div>
+    </td>
+    <td style="text-align: center;">
+        <div>@Html.ActionLink(" ", "Delete", new { id = item.book_id }, new { @class = "glyphicon glyphicon-remove", @style = "font-size: 20px;color: rgb(1,1,1);text-decoration:none" })</div>
     </td>
 </tr>
 }
