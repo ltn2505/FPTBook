@@ -53,45 +53,51 @@
             <tr>
                 <td colspan="5" style="text-align:right;" name="TotalPrice"> Sum Total: @Model.Total_Money() </td>
             </tr>
+
             <tr>
                 <td colspan="2"></td>
                 <td colspan="4" style="text-align:center">
                     @using (Html.BeginForm("OrderProduct", "ShoppingCart", FormMethod.Post))
                     {
-
+                        
                         <table style="border-collapse:separate;border-spacing:5px;">
                             <tr>
-                                <td>Account name</td>
+                                <td>@Html.LabelFor(model => model.acc_name, htmlAttributes: new { @class = "control-label col-md-2" })</td>
                                 <td>
-                                    <input type="text" name="AccName" value="@Session["username"]" readonly="" />
+                                    @Html.EditorFor(model=>model.acc_name, new { htmlAttributes = new { @class = "form-control",@Value=Session["username"] ,@required =" ",@readonly="" } })
+                                    @Html.ValidationMessageFor(model => model.acc_name, "", new { @class = "text-danger" })
                                 </td>
                                 <td></td>
                             </tr>
                             <tr>
-                                <td>Receiver's name</td>
+                                <td>@Html.LabelFor(model => model.receiver_name, htmlAttributes: new { @class = "control-label col-md-2" })</td>
                                 <td>
-                                    <input type="text" name="ReName" />
+                                    @Html.EditorFor(model => model.receiver_name, new { htmlAttributes = new { @class = "form-control", @required = "" } })
+                                    @Html.ValidationMessageFor(model => model.receiver_name, "", new { @class = "text-danger" })
                                 </td>
                                 <td></td>
                             </tr>
                             <tr>
-                                <td>Phone</td>
+                                <td>@Html.LabelFor(model => model.phone, htmlAttributes: new { @class = "control-label col-md-2" })</td>
                                 <td>
-                                    <input type="text" name="Phone" />
+                                    @Html.EditorFor(model => model.phone, new { htmlAttributes = new { @class = "form-control", @required = "" } })
+                                    @Html.ValidationMessageFor(model => model.phone, "", new { @class = "text-danger" })
                                 </td>
                                 <td></td>
                             </tr>
                             <tr>
-                                <td>Delivery address</td>
+                                <td>@Html.LabelFor(model => model.delivery_address, htmlAttributes: new { @class = "control-label col-md-2" })</td>
                                 <td>
-                                    <input type="text" name="DeAddress" />
+                                    @Html.EditorFor(model => model.delivery_address, new { htmlAttributes = new { @class = "form-control", @required = "" } })
+                                    @Html.ValidationMessageFor(model => model.delivery_address, "", new { @class = "text-danger" })
                                 </td>
                                 <td></td>
                             </tr>
                             <tr>
-                                <td>Total price</td>
+                                <td>@Html.LabelFor(model => model.total_price, htmlAttributes: new { @class = "control-label col-md-2" })</td>
                                 <td>
-                                    <input type="text" name="TotalPrice" value="@Model.Total_Money()" readonly="">
+                                    @Html.EditorFor(model => model.total_price, new { htmlAttributes = new { @class = "form-control",@Value=@Model.Total_Money() ,@required = "" } })
+                                    @Html.ValidationMessageFor(model => model.total_price, "", new { @class = "text-danger" })
                                 </td>
                                 <td></td>
                             </tr>
@@ -109,10 +115,10 @@
 
         </tfoot>
     </table>
-
     <div>
         @Html.ActionLink("Back to home page", "Index", "Home")
     </div>
+
 }
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")

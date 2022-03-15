@@ -20,21 +20,34 @@ namespace FPTBook.Models
         {
             this.order_detail = new HashSet<order_detail>();
         }
+        [Required(ErrorMessage = "Book id cannot be left blank")]
         [Display(Name = "Book id")]
         public string book_id { get; set; }
+
+        [Required(ErrorMessage = "Book name cannot be left blank")]
         [Display(Name = "Book name")]
         public string book_name { get; set; }
+
+        [Required(ErrorMessage = "Category id cannot be left blank")]
         [Display(Name = "Category id")]
         public string cate_id { get; set; }
+
+        [Required(ErrorMessage = "Price cannot be left blank")]
         [Display(Name = "Price")]
         public int book_price { get; set; }
+
+        [Required(ErrorMessage = "Quantity cannot be left blank")]
         [Display(Name = "Quantity")]
         public int book_quantity { get; set; }
+
+        [Required(ErrorMessage = "Image cannot be left blank")]
         [Display(Name = "Image")]
-        
+        [DataType(DataType.Upload)]
         public string book_picture { get; set; }
+        [Required(ErrorMessage = "Author cannot be left blank")]
         [Display(Name = "Author")]
         public string book_author { get; set; }
+        [Required(ErrorMessage = "Description cannot be left blank")]
         [Display(Name = "Description")]
         public string book_description { get; set; }
     

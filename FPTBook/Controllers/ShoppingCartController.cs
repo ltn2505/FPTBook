@@ -26,6 +26,10 @@ namespace FPTBook.Controllers
             var pro = db.books.SingleOrDefault(s => s.book_id == id);
             if (pro != null)
             {
+                if (pro.book_quantity <= 0)
+                {
+                    return Content("<script>alert('This product is currently out of stock');window.location.replace('/');</script>");
+                }
                 GetCart().Add(pro);
             }
             return RedirectToAction("ShowCart", "ShoppingCart");
@@ -43,8 +47,19 @@ namespace FPTBook.Controllers
         {
             Cart cart = Session["Cart"] as Cart;
             string id_pro = form["Book_id"];
+            book quanKho = db.books.FirstOrDefault(a => a.book_id == id_pro);
             int quantity = int.Parse(form["Quantity"]);
+            if(quantity > 5)
+            {
+                return Content("<script>alert('Can not buy quantity larger than 5');window.location.replace('/');</script>");
+            }
+            if(quantity > quanKho.book_quantity)
+            {
+                return Content("<script>alert('This product is currently out of stock');window.location.replace('/');</script>");
+            }
+            
             cart.Update_Quantity(id_pro, quantity);
+             
             return RedirectToAction("ShowCart", "ShoppingCart");
         }
         public ActionResult Delete(string id)
@@ -53,25 +68,37 @@ namespace FPTBook.Controllers
             cart.DeleteProduct(id);
             return RedirectToAction("ShowCart", "ShoppingCart");
         }
-        public ActionResult OrderProduct(FormCollection form)
+        public ActionResult OrderProduct()
         {
+            return View();
+        }
+        [HttpPost]
+        public ActionResult OrderProduct(/*FormCollection form,*/ order order )
+        {
+            if (Session["username"] == null)
+            {
+                return Content("<script>alert('You must login');window.location.replace('/');</script>");
+            }
             try
             {
                 Cart cart = Session["Cart"] as Cart;
-                order _order = new order();
+                order.order_date=DateTime.Now;
+                db.orders.Add(order);
+                db.SaveChanges();
+                //order _order = new order();
 
-                _order.order_date = DateTime.Now;
-                _order.acc_name = form["AccName"];
-                _order.receiver_name = form["ReName"];
-                _order.phone = form["Phone"];
-                _order.delivery_address = form["DeAddress"];
-                _order.total_price = int.Parse(form["TotalPrice"]);
-                db.orders.Add(_order);
+                //_order.order_date = DateTime.Now;
+                //_order.acc_name = form["AccName"];
+                //_order.receiver_name = form["ReName"];
+                //_order.phone = form["Phone"];
+                //_order.delivery_address = form["DeAddress"];
+                //_order.total_price = int.Parse(form["TotalPrice"]);
+                //db.orders.Add(_order);
 
                 foreach (var item in cart.Items)
                 {
                     order_detail orderDetail = new order_detail();
-                    orderDetail.order_id = _order.order_id;
+                    orderDetail.order_id = order.order_id;
                     orderDetail.book_id = item._shopping_product.book_id;
                     orderDetail.quantity = item._shopping_quantity;
                     orderDetail.price = item._shopping_product.book_price * item._shopping_quantity;
@@ -79,6 +106,7 @@ namespace FPTBook.Controllers
                     var pro = db.books.SingleOrDefault(s => s.book_id == orderDetail.book_id);
 
                     pro.book_quantity -= orderDetail.quantity;
+
                     db.books.Attach(pro);
                     db.Entry(pro).Property(a => a.book_quantity).IsModified = true;
 
@@ -87,7 +115,7 @@ namespace FPTBook.Controllers
 
                 db.SaveChanges();
                 cart.ClearCart();
-                return RedirectToAction("OrderSuccess", "ShoppingCart", new { id = _order.order_id });
+                return RedirectToAction("OrderSuccess", "ShoppingCart", new { id = order.order_id });
             }
             catch
             {
@@ -127,7 +155,7 @@ namespace FPTBook.Controllers
                 }
                 return View(orderHis.ToList().OrderByDescending(o => o.order_date));
             }
-            return View("ErrorCart");
+            return Content("<script>alert('You must login');window.location.replace('/');</script>");
         }
     }
 }

@@ -35,25 +35,34 @@ namespace FPTBook.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create(HttpPostedFileBase image, book book)
         {
-            if (ModelState.IsValid)
-            {
+            
                 if (image != null && image.ContentLength > 0)
                 {
                     string pic = Path.GetFileName(image.FileName);
-                    string path = Path.Combine(Server.MapPath("~/Content/images/"), pic);
-                    image.SaveAs(path);
+                    string extension = Path.GetExtension(image.FileName);
+                    string path = Path.Combine(Server.MapPath("~/Content/images/"),pic);
+                    if (extension.ToLower() == ".jpg" || extension.ToLower() == ".png" || extension.ToLower() == ".jpeg")
+                    {
+                        image.SaveAs(path);
 
-                    book.book_picture = pic;
-                    db.books.Add(book);
-                    db.SaveChanges();
+                        book.book_picture = pic;
+                        db.books.Add(book);
+                        db.SaveChanges();
 
-                    return RedirectToAction("Index");
+                        return RedirectToAction("Index");
+                    }
+                    else
+                    {
+                        ViewBag.Extension = "File is invalid. Only accept image file";
+                    }
+                    
                 }
                 else
                 {
                     return View();
                 }
-            }
+            
+            ViewBag.cate_id = new SelectList(db.categories, "cate_id", "cate_name", book.cate_id);
             return View(book);
         }
 

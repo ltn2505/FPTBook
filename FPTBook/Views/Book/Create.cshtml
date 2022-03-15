@@ -17,7 +17,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.book_id, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.book_id, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.EditorFor(model => model.book_id, new { htmlAttributes = new { @class = "form-control", @required = "" } })
                 @Html.ValidationMessageFor(model => model.book_id, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -25,7 +25,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.book_name, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.book_name, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.EditorFor(model => model.book_name, new { htmlAttributes = new { @class = "form-control", @required = "" } })
                 @Html.ValidationMessageFor(model => model.book_name, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -33,7 +33,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.cate_id, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DropDownList("cate_id", null, htmlAttributes: new { @class = "form-control" })
+                @Html.DropDownList("cate_id", null, htmlAttributes: new { @class = "form-control", @required = "" })
                 @Html.ValidationMessageFor(model => model.cate_id, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -41,7 +41,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.book_price, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.book_price, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.EditorFor(model => model.book_price, new { htmlAttributes = new { @class = "form-control", @required = "" } })
                 @Html.ValidationMessageFor(model => model.book_price, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -49,7 +49,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.book_quantity, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.book_quantity, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.EditorFor(model => model.book_quantity, new { htmlAttributes = new { @class = "form-control", @required = "" } })
                 @Html.ValidationMessageFor(model => model.book_quantity, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -58,6 +58,10 @@
             @Html.LabelFor(model => model.book_picture, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 <input class="form-control" type="file" name="image">
+                @if (ViewBag.Extension != null)
+                {
+                    <span class="text-danger" style="margin-left:30px;font-size:10px">@ViewBag.Extension</span>
+                }
                 @Html.ValidationMessageFor(model => model.book_picture, "", new { @class = "text-danger" })
             </div>
         </div>
