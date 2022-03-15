@@ -67,11 +67,13 @@ namespace FPTBook.Models
         public string acc_name { get; set; }
         [Display(Name = "Receiver's name")]
         [Required]
-        [StringLength(20, MinimumLength = 3)]
+        [StringLength(30, MinimumLength = 3)]
         public string receiver_name { get; set; }
         [Display(Name = "Number phone")]
         [Phone]
         [Required]
+        [RegularExpression(@"^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$",
+                   ErrorMessage = "Entered phone format is not valid.")]
         [StringLength(11, MinimumLength = 9)]
         public string phone { get; set; }
         [Display(Name = "Order date")]
