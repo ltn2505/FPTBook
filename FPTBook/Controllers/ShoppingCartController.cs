@@ -49,7 +49,11 @@ namespace FPTBook.Controllers
             string id_pro = form["Book_id"];
             book quanKho = db.books.FirstOrDefault(a => a.book_id == id_pro);
             int quantity = int.Parse(form["Quantity"]);
-            if(quantity > 5)
+            if (quantity <=0)
+            {
+                return Content("<script>alert('Can not buy quantity less than 1');window.location.replace('/');</script>");
+            }
+            if (quantity > 5)
             {
                 return Content("<script>alert('Can not buy quantity larger than 5');window.location.replace('/');</script>");
             }
