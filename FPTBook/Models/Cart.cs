@@ -36,6 +36,7 @@ namespace FPTBook.Models
             }
 
         }
+        
         public void Update_Quantity(string id, int quantity)
         {
             var item = items.Find(s => s._shopping_product.book_id == id);

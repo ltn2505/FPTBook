@@ -78,7 +78,7 @@ namespace FPTBook.Controllers
                 {
                     return HttpNotFound();
                 }
-                ViewBag.cate_id = new SelectList(db.categories, "cate_id", "cate_name", book.cate_id);
+                ViewBag.cate_id = new SelectList(db.categories, "cate_id", "cate_name");
                 return View(book);
         }
 
@@ -86,8 +86,7 @@ namespace FPTBook.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit(HttpPostedFileBase image, book book)
         {
-            if (ModelState.IsValid)
-            {
+           
                 if (image != null && image.ContentLength > 0)
                 {
                     string pic = Path.GetFileName(image.FileName);
@@ -106,7 +105,7 @@ namespace FPTBook.Controllers
                     return RedirectToAction("Index");
                 }
                 
-            }
+            
             return View(book);
         }
         public ActionResult Delete(string id)

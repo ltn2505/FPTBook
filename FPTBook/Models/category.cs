@@ -21,10 +21,13 @@ namespace FPTBook.Models
             this.books = new HashSet<book>();
         }
         [Display(Name = "Category id")]
+        [Required]
         public string cate_id { get; set; }
         [Display(Name = "Category name")]
+        [Required]
         public string cate_name { get; set; }
         [Display(Name = "Description")]
+        [Required]
         public string cate_description { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

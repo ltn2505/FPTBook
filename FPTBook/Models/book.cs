@@ -38,6 +38,7 @@ namespace FPTBook.Models
 
         [Required(ErrorMessage = "Quantity cannot be left blank")]
         [Display(Name = "Quantity")]
+        [Range(1, 1000)]
         public int book_quantity { get; set; }
 
         [Required(ErrorMessage = "Image cannot be left blank")]

@@ -72,12 +72,12 @@ namespace FPTBook.Controllers
             cart.DeleteProduct(id);
             return RedirectToAction("ShowCart", "ShoppingCart");
         }
-        public ActionResult OrderProduct()
-        {
-            return View();
-        }
+        //public ActionResult OrderProduct()
+        //{
+        //    return View();
+        //}
         [HttpPost]
-        public ActionResult OrderProduct(/*FormCollection form,*/ order order )
+        public ActionResult OrderProduct(order order )
         {
             if (Session["username"] == null)
             {
@@ -89,15 +89,6 @@ namespace FPTBook.Controllers
                 order.order_date=DateTime.Now;
                 db.orders.Add(order);
                 db.SaveChanges();
-                //order _order = new order();
-
-                //_order.order_date = DateTime.Now;
-                //_order.acc_name = form["AccName"];
-                //_order.receiver_name = form["ReName"];
-                //_order.phone = form["Phone"];
-                //_order.delivery_address = form["DeAddress"];
-                //_order.total_price = int.Parse(form["TotalPrice"]);
-                //db.orders.Add(_order);
 
                 foreach (var item in cart.Items)
                 {
