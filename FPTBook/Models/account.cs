@@ -37,7 +37,7 @@ namespace FPTBook.Models
         public string confirmpass { get; set; }
         [Display(Name = "Full name")]
         [Required(ErrorMessage = "Full name be left blank")]
-        [StringLength(20, MinimumLength = 5)]
+        [StringLength(60, MinimumLength = 1)]
         public string full_name { get; set; }
         [Display(Name = "Gender")]
         [Required(ErrorMessage = "Gender be left blank")]

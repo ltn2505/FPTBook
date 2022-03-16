@@ -189,11 +189,6 @@
     <Content Include="Content\Css\layout.css" />
     <Content Include="Content\Css\style.css" />
     <Content Include="Content\font\material-design-iconic-font.min.css" />
-    <Content Include="Content\images\com1.jpg" />
-    <Content Include="Content\images\com2.jpg" />
-    <Content Include="Content\images\com3.jpg" />
-    <Content Include="Content\images\Hor1.jpg" />
-    <Content Include="Content\images\Hor2.jpg" />
     <Content Include="Content\images\Hor3.jpg" />
     <Content Include="Content\images\pic2.jpg" />
     <Content Include="Content\images\pic3.jpg" />
