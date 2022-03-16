@@ -34,6 +34,7 @@ namespace FPTBook.Models
 
         [Required(ErrorMessage = "Price cannot be left blank")]
         [Display(Name = "Price")]
+        [Range(1, 1000)]
         public int book_price { get; set; }
 
         [Required(ErrorMessage = "Quantity cannot be left blank")]
